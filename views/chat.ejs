@@ -152,12 +152,14 @@
             socket.emit("joinroom");
 
             socket.on("joined", function (roomname) {
+                // console.log("Joined room " + roomname);
                 room = roomname;
                 document.querySelector(".nobody").classList.add("hidden");
             })
 
             socket.on("message", function (message) {
-                receiveMessage(message);
+                console.log(message);
+                receiveMessage(message.message);
             })
 
             chatform.addEventListener("submit", function (event) {
@@ -233,7 +235,7 @@
                     console.log("Rejected by browser" + err);
                 }
             }
-
+            
             const initiateOffer = async () => {
                 await createPeerConnection();
                 try {
